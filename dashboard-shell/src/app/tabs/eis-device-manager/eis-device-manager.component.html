@@ -1,0 +1,22 @@
+<div style="padding: 10px">
+  <mat-accordion multi="true">
+
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          DeviceRegistry
+        </mat-panel-title>
+        <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])"></mat-expansion-panel>
+      </mat-expansion-panel-header>
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('deviceRegistryUrl')| safe"> </iframe>
+
+
+
+    </mat-expansion-panel>
+
+
+
+  </mat-accordion>
+</div>

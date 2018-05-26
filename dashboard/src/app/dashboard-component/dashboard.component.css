@@ -1,0 +1,9 @@
+.box{
+    -webkit-box-shadow: 2px 2px 2px 2px  #777;
+	-moz-box-shadow: 2px 2px  2px 2px  #777;
+    box-shadow: 2px 2px  2px 2px  #777;
+    margin: 10px;
+}
+.form-field{
+    padding: 5px;
+}

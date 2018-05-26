@@ -1,0 +1,30 @@
+.audit-msg-settings-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .audit-msg-settings-container > * {
+    width: 70%;
+  }
+  
+  .audit-msg-settings-container form {
+    margin-bottom: 20px;
+  }
+  
+  .audit-msg-settings-container form > * {
+    margin: 5px 0;
+  }
+  
+  .audit-msg-settings-container .mat-radio-button {
+    margin: 0 5px;
+  }
+
+  .audit-msg-settings-btn {
+    float: right;
+    padding-right: 44%;
+    padding-top: 50px;
+  }
+
+
+
+  

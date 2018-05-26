@@ -1,0 +1,5 @@
+<div *ngIf="showShart">
+ 
+  <canvas baseChart [data]="pieChartData.data" [labels]="pieChartData.labels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+    (chartClick)="chartClicked($event)"></canvas>
+</div>

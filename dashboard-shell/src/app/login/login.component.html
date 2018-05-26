@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="dashboard-shell-toolbar">
+  <h1 class="dashboard-shell-app-name">Admin Console</h1>
+</mat-toolbar>
+
+<form class="example-form">
+
+  <div class="login-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="userId" placeholder="User Id" [formControl]="userIdControl" required>
+      <mat-error *ngIf="userIdControl.invalid">{{getUserIdErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" [(ngModel)]="pwd" placeholder="Password" [formControl]="pwdControl" required>
+      <mat-error *ngIf="pwdControl.invalid">{{getPwdErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button (click)="submit()">Submit</button>
+    <mat-error *ngIf="msg">{{msg}}</mat-error>
+
+
+
+  </div>
+
+</form>

@@ -1,0 +1,87 @@
+<div class='container'>
+  <mat-card class="example-card">
+
+    <mat-card-content>
+
+      <div>
+        <span> <label>Enterprise Repository1 </label> </span>
+        <mat-radio-group [(ngModel)]="enterpriseRepoInfo1.status" >
+          <mat-radio-button value="on" class="audit-msg-settings-radio-button">On</mat-radio-button>
+          <mat-radio-button value="off" class="audit-msg-settings-radio-button">Off</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input [(ngModel)]="enterpriseRepoInfo1.hostName" matInput required placeholder="Host Name /IP">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="enterpriseRepoInfo1.port" required placeholder="Port Number">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="enterpriseRepoInfo1.protocol" required placeholder="Protocol">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-button>Send Test Message</button>
+      </div>
+
+    </mat-card-content>
+
+
+
+  </mat-card>
+
+  <mat-card class="example-card">
+
+    <mat-card-content>
+
+      <div>
+          <span> <label>Enterprise Repository2 </label> </span>
+        <mat-radio-group  [(ngModel)]="enterpriseRepoInfo2.status">
+          <mat-radio-button value="on" class="audit-msg-settings-radio-button">On</mat-radio-button>
+          <mat-radio-button value="off" class="audit-msg-settings-radio-button">Off</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input [(ngModel)]="enterpriseRepoInfo2.hostName" matInput required placeholder="Host Name /IP">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input [(ngModel)]="enterpriseRepoInfo2.port"  matInput required placeholder="Port Number">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input  [(ngModel)]="enterpriseRepoInfo2.protocol" matInput required placeholder="Protocol">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-button>Send Test Message</button>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+  <div style="float: right;">
+    <mat-chip-list>
+      <mat-chip (click) = "onSave()">Save</mat-chip>
+      <mat-chip>Cancel</mat-chip>
+    </mat-chip-list>
+  </div>
+
+</div>

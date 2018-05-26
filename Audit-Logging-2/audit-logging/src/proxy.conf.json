@@ -1,0 +1,11 @@
+{
+  "/dashboardShell": {
+    "target": "http://10.177.215.205:32078/eis/v1/auditlogconfig",
+    "secure": false,
+    "pathRewrite": {
+      "^/auditlogconfig": ""
+    },
+    "changeOrigin": true
+  },
+ 
+}

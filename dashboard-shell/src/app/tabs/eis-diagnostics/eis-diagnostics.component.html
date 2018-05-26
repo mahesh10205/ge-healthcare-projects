@@ -1,0 +1,38 @@
+<div style="padding: 10px">
+  <mat-accordion multi="true">
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Titanium
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <button mat-raised-button (click)="openTitaniumDashboard()">Open</button>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          K8S
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('k8sUrl')| safe"> </iframe>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Telemetry
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('telemeteryUrl')| safe"> </iframe>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>

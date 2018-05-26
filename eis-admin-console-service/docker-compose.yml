@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    
+  dashboard-shell-service:
+    build:
+     context: ./dashboard-shell-service
+     dockerfile: Dockerfile
+    ports:
+     - "8091:8090"
+    environment:  
+     - identityUrl=http://3.28.93.151:5000/v3/auth/tokens
+     - titaniumUrl=http://3.28.93.151/admin
+     - k8sUrl=https://localhost:30000
+     - telemeteryUrl=http://3.28.94.20:30090/graph
+     - prometheusUrl=http://3.28.94.20:30090/targets
+     - grafanaUrl=http://3.28.94.20:30001/dashboard/db/prometheus-stats
+     - kibanaUrl=http://3.28.94.20:8001/api/v1/proxy/namespaces/kube-system/services/kibana-logging/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(_source),index:'logstash-*',interval:auto,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc))
+     - deviceRegistryUrl=http://3.204.43.214:30808/all-devices

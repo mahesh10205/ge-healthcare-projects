@@ -1,0 +1,43 @@
+<div style="padding: 10px">
+  <mat-accordion multi="true">
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Grafana
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('grafanaUrl')| safe"> </iframe>
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Kibana
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('kibanaUrl')| safe"> </iframe>
+
+
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel style="margin: 10px" *ngIf="iframeService.isAnyRoleExist(['admin','_member_'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Prometheus
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <iframe class="iframe-continer" frameborder="0" [src]="urlInfoMap.get('prometheusUrl')| safe"> </iframe>
+    </mat-expansion-panel>
+
+
+
+  </mat-accordion>
+</div>

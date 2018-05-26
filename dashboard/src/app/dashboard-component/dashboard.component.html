@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-7  form-inline box">
+
+            <div class="form-group form-field">
+                <label for="iterations">Iterations</label>
+                <input type="iterations" class="form-control" id="iterations" [(ngModel)]="iterations">
+            </div>
+
+            <div class="form-group form-field">
+                <label for="rows">Rows</label>
+                <input type="text" class="form-control" id="rows" [(ngModel)]="rows">
+            </div>
+
+            <div class="form-group form-field">
+                <button class="btn" type="button" (click)="onSubmit()">Submit </button>
+                <span style="color:red">{{status}}</span>
+            </div>
+        </div>
+
+
+        <div class="col-sm-11 box" style="width:97%">
+            <div>
+                <chart-component [onSubmitEmitter]="onSubmitEmitter" [onChartClickEmitter]="onChartClickEmitter" [pieChartEmitter]="pieChartEmitter"></chart-component>
+            </div>
+        </div>
+
+        <div class="col-sm-4 ">
+            <pie-chart-component [pieChartEmitter]="pieChartEmitter"></pie-chart-component>
+
+        </div>
+
+        <div class="col-sm-6 ">
+            <app-dashboard-grid-component [onChartClickEmitter]="onChartClickEmitter"></app-dashboard-grid-component>
+        </div>
+
+
+
+    </div>
+</div>

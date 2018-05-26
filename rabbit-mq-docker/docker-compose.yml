@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+
+  rabbitmq-ws:
+    image: rabbitmq:management
+    command : bash -c "rabbitmq-plugins enable --offline rabbitmq_web_stomp;rabbitmq-server"
+    ports:
+      - "25672:15672"
+      - "25674:15674"
+      - "5672:5672"
+    volumes:
+      - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro  
+      
+#  spring-boot-web-socket:
+#    build:
+#     context: ./spring-boot-web-socket
+#     dockerfile: Dockerfile
+#    ports:
+#     - "8090:8090"

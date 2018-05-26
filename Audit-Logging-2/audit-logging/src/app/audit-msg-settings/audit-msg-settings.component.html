@@ -1,0 +1,31 @@
+<div class="audit-msg-settings-container">
+
+  <form class="audit-msg-settings-container" [formGroup]="msgSettingsFormGroup">
+
+    <div>
+      <mat-form-field >
+        <input matInput formControlName="auditSourceIdFormCtrl" required placeholder="Audit Source Id" [(ngModel)]="auditSourceId">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <label>Patient Name Anonymized </label>
+      <mat-radio-group formControlName="pantientNameFormCtrl" [(ngModel)]="pantientNameAnnonymized">
+        <mat-radio-button value="on" class="audit-msg-settings-radio-button">On</mat-radio-button>
+        <mat-radio-button value="off" class="audit-msg-settings-radio-button">Off</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div>
+
+      <mat-chip-list class="audit-msg-settings-btn">
+        <mat-chip (click)="onSave()">Save</mat-chip>
+        <mat-chip (click)="onCancel()">Cancel</mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+  </form>
+
+
+</div>

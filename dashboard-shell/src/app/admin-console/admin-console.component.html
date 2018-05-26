@@ -1,0 +1,79 @@
+<div class="dashboard-shell-container" [class.dashboard-shell-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="dashboard-shell-toolbar">
+
+    <mat-toolbar-row>
+      <img src="/assets/images/ge-logo.png" style="height: 50px;">
+      <button mat-icon-button>
+        <mat-icon (click)="snav.toggle()">menu</mat-icon>
+      </button>
+
+      <span class="dashboard-shell-app-name">Admin Console</span>
+      <span class="spacer"></span>
+
+      <span>
+        <span class="user">Welcome {{loggedInUser}} </span>
+        <a [routerLink]="['/logout','logout']" class="logout">Logout</a>
+      </span>
+
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container class="dashboard-shell-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+      <mat-selection-list>
+        <mat-list-option [selected]="nav.selected" [checkboxPosition]="before" *ngFor="let nav of dashboardShellMenu" [id]="nav.id"
+          (selectionChange)="selectionChange($event,nav.id)" (focusChange)="selectionChange($event,nav.id)">
+          <span [className]="nav.id==selectedTabInfo.id? 'blue-line' : '' ">{{nav.label}}</span>
+        </mat-list-option>
+      </mat-selection-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <mat-tab-group class="dashboard-shell-tab-group" [selectedIndex]="selectedTabInfo.pos" (selectedTabChange)="onSelectedTabChange($event)">
+
+        <ng-container *ngFor="let tabInfo of showTabsList">
+          <mat-tab [label]="tabInfo.label" [id]="tabInfo.id">
+
+            <ng-template [ngTemplateOutlet]="tabInfo.content"></ng-template>
+
+          </mat-tab>
+        </ng-container>
+
+      </mat-tab-group>
+
+      <ng-template #eisAccountManager>
+        <eis-account-manager ></eis-account-manager>
+      </ng-template>
+
+      <ng-template #eisConfigManager>
+        <eis-config-manager ></eis-config-manager>
+      </ng-template>
+
+      <ng-template #eisDeviceManager>
+        <eis-device-manager ></eis-device-manager>
+      </ng-template>
+
+      <ng-template #eisDiagnostics>
+        <eis-diagnostics ></eis-diagnostics>
+      </ng-template>
+
+      <ng-template #eisServicesSwManager>
+        <eis-services-sw-manager ></eis-services-sw-manager>
+      </ng-template>
+
+      <ng-template #remoteUiFrontend>
+        <remote-ui-front-end ></remote-ui-front-end>
+      </ng-template>
+      <ng-template #auditLogging>
+        <audit-logging ></audit-logging>
+      </ng-template>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eis-admin-console
+  namespace: admin-console
+spec:
+  type: NodePort
+  ports:
+  - targetPort: 8090
+    name: eis-admin-console
+    port: 30100
+    nodePort: 32188
+  selector:
+   app: eis-admin-console
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eis-admin-console
+  namespace: admin-console
+spec:
+  template:
+    metadata:
+      labels:
+        app: eis-admin-console
+    spec:
+      containers:
+      - name: eis-admin-console
+        image: hc-us-east-aws-artifactory.cloud.health.ge.com/docker-eis/eis-admin-console:1.0.5
+        ports:
+        - containerPort: 8090
+        env:
+        - name: identityUrl
+          value: "http://3.28.93.151:5000/v3/auth/tokens"
+        - name: titaniumUrl
+          value: "http://3.28.93.151/admin"
+        - name: k8sUrl
+          value: "https://3.28.94.24:31410/#!/login"
+        - name: telemeteryUrl
+          value: "http://3.28.94.24:31333/graph?g0.range_input=1h&g0.expr=ALERTS&g0.tab=0"
+        - name: prometheusUrl
+          value: "http://3.28.94.24:31333/graph"
+        - name: grafanaUrl
+          value: "http://3.28.94.20:30001/dashboard/db/prometheus-stats"
+        - name: deviceRegistryUrl
+          value: "http://3.204.43.214:30808/all-devices"        

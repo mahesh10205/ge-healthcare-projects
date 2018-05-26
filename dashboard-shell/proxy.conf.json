@@ -1,0 +1,44 @@
+{
+  "/dashboardShell": {
+    "target": "http://localhost:8090/dashboardShell",
+    "secure": false,
+    "pathRewrite": {
+      "^/dashboardShell": ""
+    },
+    "changeOrigin": true
+  },
+  "/login": {
+    "target": "http://localhost:8090/login",
+    "secure": false,
+    "pathRewrite": {
+      "^/login": ""
+    },
+    "changeOrigin": true
+  },
+  "/logout": {
+    "target": "http://localhost:8090/logout",
+    "secure": false,
+    "pathRewrite": {
+      "^/logout": ""
+    },
+    "changeOrigin": true
+  },
+
+  "/userInfo": {
+    "target": "http://localhost:8090/userInfo",
+    "secure": false,
+    "pathRewrite": {
+      "^/userInfo": ""
+    },
+    "changeOrigin": true
+  },
+
+  "/k8sUrl": {
+    "target": "http://localhost:8091/",
+    "secure": false,
+    "pathRewrite": {
+      "^/k8sUrl": ""
+    },
+    "changeOrigin": true
+  }
+}

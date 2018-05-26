@@ -1,0 +1,1567 @@
+swagger: "2.0"
+info:
+  description: "EAT based solution for audit logging on EIS."
+  version: "v1"
+  title: "Audit Logging"
+  contact:
+    name: ""
+basePath: "/eis/v1"
+schemes:
+- "http"
+- "https"
+paths:
+  /auditlogconfig/auditmessageconfig:
+    get:
+      summary: "get audit message Configuration"
+      description: ""
+      operationId: "getAuditMsgConfiguration"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "200 response"
+        500:
+          description: "500 response"
+    patch:
+      summary: "save audit message config"
+      description: ""
+      operationId: "saveAuditMsgConfig"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Send test message"
+        required: true
+        schema:
+          $ref: "#/definitions/AuditMsgConfig"
+        x-examples:
+          application/json: "{\"anonymization\":\"true\",\"auditSourceID\":\"testing\"\
+            }"
+      responses:
+        200:
+          description: "200 response"
+  /auditlogconfig/repositoryconfiguration:
+    get:
+      summary: "get Repository Configuration"
+      description: ""
+      operationId: "getRepositoryConfiguration"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "200 response"
+        500:
+          description: "500 response"
+    patch:
+      summary: "saves repository configuration"
+      description: ""
+      operationId: "saveRepositoryConfiguration"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Repository Configuration"
+        required: true
+        schema:
+          $ref: "#/definitions/RepositoryConfigInput"
+        x-examples:
+          application/json: "{\"repository_1_status\":\"true\",\"repository_1_host\"\
+            :\"3.204.30.98\",\"repository_1_port\":\"8443\",\"repository_1_protocol\"\
+            :\"2\",\"repository_2_status\":\"true\",\"repository_2_host\":\"3.204.30.98\"\
+            ,\"repository_2_port\":\"8443\",\"repository_2_protocol\":\"2\"}"
+      responses:
+        200:
+          description: "200 response"
+  /auditlogconfig/repositoryconnection:
+    post:
+      summary: "send test message"
+      description: ""
+      operationId: "sendTestMessage"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Send test message"
+        required: true
+        schema:
+          $ref: "#/definitions/TestMessageInput"
+        x-examples:
+          application/json: "{\"host\":\"3.204.30.98\",\"port\":\"8443\",\"protocol\"\
+            :\"2\"}"
+      responses:
+        200:
+          description: "200 response"
+        417:
+          description: "417 response"
+  /imagingdevice/eat/event/dataMove:
+    post:
+      summary: "log Data Move"
+      description: ""
+      operationId: "logDataMove"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Data Move log"
+        required: true
+        schema:
+          $ref: "#/definitions/DataMoveInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SERIOUS_FAILURE\",\"type\":\"EXPORT\"\
+            ,\"sourceID\":\"srdId\",\"isSourceRequestor\":\"IS_REQUESTOR\",\"destinationID\"\
+            :\"destId\",\"isDestinationRequestor\":\"NOT_REQUESTOR\",\"patientID\"\
+            :\"patientId\",\"optionalDataMoveInfo\":{\"sourceNetworkAccessPointTypeCode\"\
+            :\"MACHINE\",\"sourceNetworkAccessPointID\":\"#616DDF\",\"destinationNetworkAccessPointTypeCode\"\
+            :\"IP_ADDRESS\",\"destinationNetworkAccessPointID\":\"1.1.1.1\",\"studyInstanceUIDs\"\
+            :[\"uid1\",\"uid2\",\"uid3\",\"uid4\"],\"dicomObjectDescriptionContents\"\
+            :{\"uid4\":{\"mpps\":[\"uid4_MP1\",\"uid4_MP2\"],\"accession\":[\"Acc1\"\
+            ,\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid2\":{\"mpps\":[\"uid2_MP1\",\"uid2_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true},\"uid3\"\
+            :{\"mpps\":[\"uid3_MP1\",\"uid3_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"\
+            ],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid1\":{\"mpps\":[\"uid1_MP1\",\"uid1_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true}},\"\
+            detail\":\"Dicom Stuff\"}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/transferred:
+    post:
+      summary: "log transferred"
+      description: ""
+      operationId: "logTransferred"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Transferred audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/TransferedInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"MAJOR_FAILURE\",\"action\":\"CREATE\"\
+            ,\"sourceID\":\"sourceID\",\"isSourceRequestor\":\"NOT_REQUESTOR\",\"\
+            destinationID\":\"destinationID\",\"isDestinationRequestor\":\"IS_REQUESTOR\"\
+            ,\"patientID\":\"patientID\",\"studyInstanceUIDs\":[\"uid 1\",\"uid2\"\
+            ,\"uid3\"],\"optionalTransferringInfo\":{\"dicomObjectDescriptionContents\"\
+            :{\"uid 1\":{\"mpps\":[\"uid 1_MP1\",\"uid 1_MP2\"],\"accession\":[\"\
+            Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\"\
+            :2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\"\
+            ,\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\"\
+            :3}],\"participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid2\":{\"mpps\":[\"uid2_MP1\",\"uid2_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true},\"uid3\"\
+            :{\"mpps\":[\"uid3_MP1\",\"uid3_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"\
+            ],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true}}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/xml:
+    post:
+      summary: "xml"
+      description: ""
+      operationId: "logXml"
+      consumes:
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Xml log"
+        required: true
+        schema:
+          type: "string"
+        x-examples:
+          application/xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><AuditMessage\
+            \ ><EventIdentification EventActionCode=\"E\" EventDateTime=\"2008-06-07T03:55:34\"\
+            \ EventOutcomeIndicator=\"0\"><EventID  code=\"110100\" codeSystemName=\"\
+            DCM\" displayName=\"Simply Testing\" /><EventTypeCode code=\"110120\"\
+            \ codeSystemName=\"DCM\" displayName=\"Application Start\"/></EventIdentification><ActiveParticipant\
+            \ UserID=\"TEST APP ID\" AlternativeUserID=\"AE TITLE\" UserIsRequestor=\"\
+            FALSE\"></ActiveParticipant><ActiveParticipant UserID=\"User ID\" UserIsRequestor=\"\
+            TRUE\"></ActiveParticipant></AuditMessage>\""
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/userauthentication:
+    post:
+      summary: "log user authentication"
+      description: ""
+      operationId: "logUserAuthentication"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User Authentication audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/UserAuthenticationInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"userID\":\"auditlog123\"\
+            ,\"userNetworkAccessPointTypeCode\":\"MACHINE\",\"userNetworkAccessPointID\"\
+            :\"network123\",\"authenticationAction\":\"LOGIN\",\"optionalUserAuthInfo\"\
+            :{\"userName\":\"auditlogUserName\",\"nodeID\":\"123123123\",\"nodeName\"\
+            :\"testNode\",\"detail\":\"auditlog123 detail\"}}"
+      responses:
+        200:
+          description: "200 response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/patientRecord:
+    post:
+      summary: "log patient Record"
+      description: ""
+      operationId: "logPatientRecord"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Patient Record audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/PatientRecordInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"action\":\"READ\",\"\
+            sourceID\":\"sourceID123\",\"patientID\":\"patientID123\",\"optionalPatientRecordInfo\"\
+            :{\"sourceNetworkAccessPointTypeCode\":\"IP_ADDRESS\",\"sourceNetworkAccessPointID\"\
+            :\" 1.1.1.1\",\"sourceName\":\"Source Name\",\"sourceAlternateUserID\"\
+            :\"Source Alt ID\",\"destinationID\":\"DestID|Application\",\"destinationNetworkAccessPointTypeCode\"\
+            :\"IP_ADDRESS\",\"destinationNetworkAccessPointID\":\" 2.2.2.2\",\"destinationName\"\
+            :\"Destination Name\",\"destinationAlternateUserID\":\"Source Alt ID\"\
+            ,\"humanRequestorID\":\"human id\",\"messageIdentifiers\":[\"msg1\",\"\
+            msg2\"],\"patientIDs\":[\"999-99-4453^^^USSSA&1.2.mm.nnnnn.555.6666&ISO\"\
+            ,\"999-99-4453^^^USSSA&1.2.mm.nnnnn.555.6666&ISO\"]}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/networkEntry:
+    post:
+      summary: "log network Entry"
+      description: ""
+      operationId: "logNetworkEntry"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Network Entry audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/NetworkEntryInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"MAJOR_FAILURE\",\"type\":\"ATTACH\"\
+            ,\"nodeID\":\"3.2.2.2\",\"optionalNetworkEntryInfo\":{\"nodeNetworkAccessPointTypeCode\"\
+            :\"IP_ADDRESS\",\"nodeNetworkAccessPointID\":\"3.3.3.3\",\"nodeAlternateUserID\"\
+            :\"AE Title\"}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/auditLogUsed:
+    post:
+      summary: "audit Log Used"
+      description: ""
+      operationId: "logAuditLogUsed"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Used audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/AuditLogUsedInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"processID\":\"EAT\",\"\
+            auditLogURI\":\"3.70.22.22:/blah/blah\",\"optionalAuditLogUsedInfo\":{\"\
+            humanRequestorID\":\"SSO ID\",\"humanRequestorName\":\"SOme one\",\"dicomObjectDescriptionContent\"\
+            :{\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2\"],\"numberOfInstances\":2}]}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/orderRecord:
+    post:
+      summary: "log order Record"
+      description: ""
+      operationId: "logOrderRecord"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Order Record audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/OrderRecordInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"action\":\"CREATE\",\"\
+            sourceID\":\"Src ID\",\"patientID\":\"PID\",\"optionalOrderRecordInfo\"\
+            :{\"sourceNetworkAccessPointTypeCode\":\"IP_ADDRESS\",\"sourceNetworkAccessPointID\"\
+            :\" 1.1.1.1\",\"humanRequestorID\":\"human id\",\"humanRequestorName\"\
+            :\"human name\"}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/procedureRecord:
+    post:
+      summary: "log procedure Record"
+      description: ""
+      operationId: "logProcedureRecord"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Procedure Record audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/ProcedureRecordInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"action\":\"CREATE\",\"\
+            sourceID\":\"Src ID\",\"patientID\":\"PID\",\"optionalProcedureRecordInfo\"\
+            :{\"sourceNetworkAccessPointTypeCode\":\"IP_ADDRESS\",\"sourceNetworkAccessPointID\"\
+            :\" 1.1.1.1\",\"humanRequestorID\":\"human id\",\"humanRequestorName\"\
+            :\"human name\",\"studyInstanceUIDs\":[\"uid 1\",\"uid2\",\"uid3\"]}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/studyDeleted:
+    post:
+      summary: "log study Deleted"
+      description: ""
+      operationId: "logStudyDeleted"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Study Deleted audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/StudyDeletedInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"MAJOR_FAILURE\",\"processID\":\"\
+            process ID\",\"patientID\":\"patient ID\",\"studyInstanceUIDs\":[\"uid\
+            \ 1\",\"uid2\",\"uid3\"],\"optionalAccessedInfo\":{\"dicomObjectDescriptionContents\"\
+            :{\"uid 1\":{\"mpps\":[\"uid 1_MP1\",\"uid 1_MP2\"],\"accession\":[\"\
+            Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\"\
+            :2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\"\
+            ,\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\"\
+            :3}],\"participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid2\":{\"mpps\":[\"uid2_MP1\",\"uid2_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true},\"uid3\"\
+            :{\"mpps\":[\"uid3_MP1\",\"uid3_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"\
+            ],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true}}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/dataAccessed:
+    post:
+      summary: "log data Accessed"
+      description: ""
+      operationId: "logDataAccessed"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Data Accessed audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/DataAccessedInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"MAJOR_FAILURE\",\"action\":\"CREATE\"\
+            ,\"processID\":\"process ID\",\"patientID\":\"patient ID\",\"studyInstanceUIDs\"\
+            :[\"uid 1\",\"uid2\",\"uid3\",\"uid4\"],\"optionalAccessedInfo\":{\"dicomObjectDescriptionContents\"\
+            :{\"uid 1\":{\"mpps\":[\"uid 1_MP1\",\"uid 1_MP2\"],\"accession\":[\"\
+            Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\"\
+            :2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\"\
+            ,\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\"\
+            ,\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\"\
+            :3}],\"participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid4\":{\"mpps\":[\"uid4_MP1\",\"uid4_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true},\"uid2\"\
+            :{\"mpps\":[\"uid2_MP1\",\"uid2_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"\
+            ],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid3\":{\"mpps\":[\"uid3_MP1\",\"uid3_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true}}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/beginTransferring:
+    post:
+      summary: "log begin Transferring"
+      description: ""
+      operationId: "logBeginTransferring"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Begin Transferring audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/BeginTransferringInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"MAJOR_FAILURE\",\"sourceID\":\"sourceID\"\
+            ,\"isSourceRequestor\":\"NOT_REQUESTOR\",\"destinationID\":\"destinationID\"\
+            ,\"isDestinationRequestor\":\"IS_REQUESTOR\",\"patientID\":\"patientID\"\
+            ,\"studyInstanceUIDs\":[\"uid 1\",\"uid2\",\"uid3\"],\"optionalTransferringInfo\"\
+            :{\"dicomObjectDescriptionContents\":{\"uid 1\":{\"mpps\":[\"uid 1_MP1\"\
+            ,\"uid 1_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"\
+            sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"\
+            ],\"numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true},\"uid2\"\
+            :{\"mpps\":[\"uid2_MP1\",\"uid2_MP2\"],\"accession\":[\"Acc1\",\"ACC2\"\
+            ],\"sopClassInfo\":[{\"sopClassUID\":\"SOP1.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop1Inst1\",\"SOP1Inst2@\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP2.2.345.6789\",\"instanceUIDs\":[\"Sop2Inst1\",\"SOP2Inst2\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP3.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop3Inst1\",\"SOP3Inst2\",\"SOP3Inst3\"],\"numberOfInstances\":3}],\"\
+            participantObjectContainsStudy\":[\"Study1\",\"Study12\"],\"encrypted\"\
+            :true,\"anonymized\":true},\"uid3\":{\"mpps\":[\"uid3_MP1\",\"uid3_MP2\"\
+            ],\"accession\":[\"Acc1\",\"ACC2\"],\"sopClassInfo\":[{\"sopClassUID\"\
+            :\"SOP1.2.345.6789\",\"instanceUIDs\":[\"Sop1Inst1\",\"SOP1Inst2@\"],\"\
+            numberOfInstances\":2},{\"sopClassUID\":\"SOP2.2.345.6789\",\"instanceUIDs\"\
+            :[\"Sop2Inst1\",\"SOP2Inst2\"],\"numberOfInstances\":2},{\"sopClassUID\"\
+            :\"SOP3.2.345.6789\",\"instanceUIDs\":[\"Sop3Inst1\",\"SOP3Inst2\",\"\
+            SOP3Inst3\"],\"numberOfInstances\":3}],\"participantObjectContainsStudy\"\
+            :[\"Study1\",\"Study12\"],\"encrypted\":true,\"anonymized\":true}}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/securityAlert:
+    post:
+      summary: "log security Alert"
+      description: ""
+      operationId: "logSecurityAlert"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Security Alert audit log"
+        required: true
+        schema:
+          $ref: "#/definitions/SecurityAlertInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SERIOUS_FAILURE\",\"alertType\":\"\
+            EMERGENCY_OVERRIDE\",\"reportingProcessID\":\"reporting process id\",\"\
+            alertSubjectID\":\"alert subject id\",\"alertDetail\":\"alert detail\"\
+            ,\"optionalSecurityAlertInfo\":{\"reportingProcessNetworkAccessPointTypeCode\"\
+            :\"MACHINE\",\"reportingProcessNetworkAccessPointID\":\"2.2.2.2\",\"reportedPersonID\"\
+            :\"reported person id\",\"reportedPersonName\":\"reported person name\"\
+            }}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/query:
+    post:
+      summary: "log Query"
+      description: ""
+      operationId: "logQuery"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Query log"
+        required: true
+        schema:
+          $ref: "#/definitions/QueryInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"sourceID\":\"srcid\"\
+            ,\"destinationID\":\"destinationID\",\"queryUID\":\"sopClassUID\",\"transferSyntaxUID\"\
+            :\"transferSystaxUID\",\"query\":[113,117,101,114,121],\"optionalQueryInfo\"\
+            :{\"sourceNetworkAccessPointTypeCode\":\"IP_ADDRESS\",\"sourceNetworkAccessPointID\"\
+            :\"I am source\",\"destinationNetworkAccessPointTypeCode\":\"IP_ADDRESS\"\
+            ,\"destinationNetworkAccessPointID\":\"I am dest\",\"humanRequestorID\"\
+            :\"humanId\",\"patientID\":\"paitent id\",\"detail\":\"some free text\"\
+            }}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event/applicationActivity:
+    post:
+      summary: "log Application Activity"
+      description: ""
+      operationId: "logApplicationActivity"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Application Activity log"
+        required: true
+        schema:
+          $ref: "#/definitions/ApplicationActivityInput"
+        x-examples:
+          application/json: "{\"eventOutcome\":\"SUCCESS\",\"activity\":\"START\"\
+            ,\"applicationID\":\"TEST APP ID\",\"optionalAppActivityInfo\":{\"userId\"\
+            :\"User IDxxx\",\"userName\":\"Usr Name\",\"appAlternateUserID\":\"AE\
+            \ TITLE\"}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+  /imagingdevice/eat/event:
+    post:
+      summary: "log event"
+      description: ""
+      operationId: "logEvent"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Event log"
+        required: true
+        schema:
+          $ref: "#/definitions/EventInput"
+        x-examples:
+          application/json: "{\"event\":\"USERAUTHENTICATION\",\"userAuthentication_input\"\
+            :{\"eventOutcome\":\"SUCCESS\",\"userID\":\"auditlog123\",\"userNetworkAccessPointTypeCode\"\
+            :\"MACHINE\",\"userNetworkAccessPointID\":\"network123\",\"authenticationAction\"\
+            :\"LOGIN\",\"optionalUserAuthInfo\":{\"userName\":\"auditlogUserName\"\
+            ,\"nodeID\":\"123123123\",\"nodeName\":\"testNode\",\"detail\":\"auditlog123\
+            \ detail\"}}}"
+      responses:
+        200:
+          description: "200response"
+        201:
+          description: "201 response"
+definitions:
+  TestMessageInput:
+    type: "object"
+    properties:
+      host:
+        type: "string"
+      port:
+        type: "integer"
+        format: "int32"
+      protocol:
+        type: "integer"
+        format: "int32"
+  AuditMsgConfig:
+    type: "object"
+    properties:
+      anonymization:
+        type: "boolean"
+      auditSourceID:
+        type: "string"
+  RepositoryConfigInput:
+    type: "object"
+    properties:
+      isrepository_1_status:
+        type: "boolean"
+      getrepository_1_host:
+        type: "string"
+      getrepository_1_port:
+        type: "integer"
+        format: "int32"
+      getrepository_1_protocol:
+        type: "integer"
+        format: "int32"
+      isrepository_2_status:
+        type: "boolean"
+      getrepository_2_host:
+        type: "string"
+      getrepository_2_port:
+        type: "integer"
+        format: "int32"
+      getrepository_2_protocol:
+        type: "integer"
+        format: "int32"
+  CodedValueType:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      codeSystem:
+        type: "string"
+      displayText:
+        type: "string"
+      originalText:
+        type: "string"
+  DICOMObjectDescriptionContent:
+    type: "object"
+    properties:
+      mpps:
+        type: "array"
+        items:
+          type: "string"
+      accession:
+        type: "array"
+        items:
+          type: "string"
+      sopClassInfo:
+        type: "array"
+        items:
+          $ref: "#/definitions/SOPClassDetails"
+      participantObjectContainsStudy:
+        type: "array"
+        items:
+          type: "string"
+      encrypted:
+        type: "boolean"
+      anonymized:
+        type: "boolean"
+  DataMoveInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      subEvent:
+        $ref: "#/definitions/CodedValueType"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      destinationNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      destinationNetworkAccessPointID:
+        type: "string"
+      destinationName:
+        type: "string"
+      destinationAlternateUserID:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      isHumanRequestorTheRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      patientName:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      mediaType:
+        $ref: "#/definitions/CodedValueType"
+      documentURI:
+        type: "string"
+      documentURIs:
+        type: "array"
+        items:
+          type: "string"
+      documentUID:
+        type: "string"
+      documentUIDs:
+        type: "array"
+        items:
+          type: "string"
+      submissionID:
+        type: "string"
+      repositoryUniqueIds:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      homeCommunityIds:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      dicomObjectDescriptionContents:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/DICOMObjectDescriptionContent"
+      valueSetId:
+        type: "string"
+      valueSetName:
+        type: "string"
+      valueSetVersion:
+        type: "string"
+  DataMoveInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      type:
+        type: "string"
+        enum:
+        - "IMPORT_CREATE"
+        - "IMPORT_UPDATE"
+        - "IMPORT_DELETE"
+        - "EXPORT"
+      sourceID:
+        type: "string"
+      isSourceRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      destinationID:
+        type: "string"
+      isDestinationRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      patientID:
+        type: "string"
+      optionalDataMoveInfo:
+        $ref: "#/definitions/DataMoveInfo"
+  SOPClassDetails:
+    type: "object"
+    properties:
+      instanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      numberOfInstances:
+        type: "integer"
+        format: "int32"
+      sopclassUID:
+        type: "string"
+  TransferedInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      action:
+        type: "string"
+        enum:
+        - "CREATE"
+        - "READ"
+        - "UPDATE"
+        - "EXECUTE"
+      sourceID:
+        type: "string"
+      isSourceRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      destinationID:
+        type: "string"
+      isDestinationRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      patientID:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      optionalTransferringInfo:
+        $ref: "#/definitions/TransferringInfo"
+  TransferringInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      destinationNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      destinationNetworkAccessPointID:
+        type: "string"
+      destinationName:
+        type: "string"
+      destinationAlternateUserID:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      patientName:
+        type: "string"
+      dicomObjectDescriptionContents:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/DICOMObjectDescriptionContent"
+  UserAuthInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      userName:
+        type: "string"
+      nodeID:
+        type: "string"
+      nodeName:
+        type: "string"
+      nodeAlternateUserID:
+        type: "string"
+      nodeNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      nodeNetworkAccessPointID:
+        type: "string"
+  UserAuthenticationInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      userID:
+        type: "string"
+      userNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      userNetworkAccessPointID:
+        type: "string"
+      authenticationAction:
+        type: "string"
+        enum:
+        - "LOGIN"
+        - "LOGOUT"
+      optionalUserAuthInfo:
+        $ref: "#/definitions/UserAuthInfo"
+  PatientRecordInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      subEvent:
+        $ref: "#/definitions/CodedValueType"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      isSourceRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      destinationID:
+        type: "string"
+      destinationNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      destinationNetworkAccessPointID:
+        type: "string"
+      destinationName:
+        type: "string"
+      destinationAlternateUserID:
+        type: "string"
+      isDestinationRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      messageIdentifier:
+        type: "string"
+      messageIdentifiers:
+        type: "array"
+        items:
+          type: "string"
+      patientIDs:
+        type: "array"
+        items:
+          type: "string"
+      patientName:
+        type: "string"
+  PatientRecordInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      action:
+        type: "string"
+        enum:
+        - "CREATE"
+        - "READ"
+        - "UPDATE"
+        - "DELETE"
+      sourceID:
+        type: "string"
+      patientID:
+        type: "string"
+      optionalPatientRecordInfo:
+        $ref: "#/definitions/PatientRecordInfo"
+  NetworkEntryInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      nodeNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      nodeNetworkAccessPointID:
+        type: "string"
+      nodeName:
+        type: "string"
+      nodeAlternateUserID:
+        type: "string"
+  NetworkEntryInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      type:
+        type: "string"
+        enum:
+        - "ATTACH"
+        - "DETACH"
+      nodeID:
+        type: "string"
+      optionalNetworkEntryInfo:
+        $ref: "#/definitions/NetworkEntryInfo"
+  AuditLogUsedInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      processName:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      dicomObjectDescriptionContent:
+        $ref: "#/definitions/DICOMObjectDescriptionContent"
+  AuditLogUsedInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      processID:
+        type: "string"
+      auditLogURI:
+        type: "string"
+      optionalAuditLogUsedInfo:
+        $ref: "#/definitions/AuditLogUsedInfo"
+  OrderRecordInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+  OrderRecordInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      action:
+        type: "string"
+        enum:
+        - "CREATE"
+        - "READ"
+        - "UPDATE"
+        - "DELETE"
+      sourceID:
+        type: "string"
+      patientID:
+        type: "string"
+      orderID:
+        type: "string"
+      optionalOrderRecordInfo:
+        $ref: "#/definitions/OrderRecordInfo"
+  ProcedureRecordInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+  ProcedureRecordInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      action:
+        type: "string"
+        enum:
+        - "CREATE"
+        - "READ"
+        - "UPDATE"
+        - "DELETE"
+      sourceID:
+        type: "string"
+      patientID:
+        type: "string"
+      optionalProcedureRecordInfo:
+        $ref: "#/definitions/ProcedureRecordInfo"
+  DataAccessedInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      processName:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      patientName:
+        type: "string"
+      dicomObjectDescriptionContents:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/DICOMObjectDescriptionContent"
+  StudyDeletedInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      processID:
+        type: "string"
+      patientID:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      optionalAccessedInfo:
+        $ref: "#/definitions/DataAccessedInfo"
+  DataAccessedInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      action:
+        type: "string"
+        enum:
+        - "CREATE"
+        - "READ"
+        - "UPDATE"
+        - "DELETE"
+      processID:
+        type: "string"
+      patientID:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      optionalAccessedInfo:
+        $ref: "#/definitions/DataAccessedInfo"
+  BeginTransferringInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      sourceID:
+        type: "string"
+      isSourceRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      destinationID:
+        type: "string"
+      isDestinationRequestor:
+        type: "string"
+        enum:
+        - "IS_REQUESTOR"
+        - "NOT_REQUESTOR"
+      patientID:
+        type: "string"
+      studyInstanceUIDs:
+        type: "array"
+        items:
+          type: "string"
+      optionalTransferringInfo:
+        $ref: "#/definitions/TransferringInfo"
+  SecurityAlertInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      reportingProcessNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      reportingProcessNetworkAccessPointID:
+        type: "string"
+      reportingPersonID:
+        type: "string"
+      reportingPersonName:
+        type: "string"
+      reportingPersonNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      reportingPersonNetworkAccessPointID:
+        type: "string"
+      reportedProcessID:
+        type: "string"
+      reportedProcessNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      reportedProcessNetworkAccessPointID:
+        type: "string"
+      reportedPersonID:
+        type: "string"
+      reportedPersonName:
+        type: "string"
+      reportedPersonNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      reportedPersonNetworkAccessPointID:
+        type: "string"
+      dicomObjectDescriptionContent:
+        $ref: "#/definitions/DICOMObjectDescriptionContent"
+  SecurityAlertInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      alertType:
+        type: "string"
+        enum:
+        - "NODE_AUTHENTICATION"
+        - "EMERGENCY_OVERRIDE"
+        - "NETWORK_CONFIGURATION"
+        - "SECURITY_CONFIGURATION"
+        - "HARDWARE_CONFIGURATION"
+        - "SOFTWARE_CONFIGURATION"
+        - "USE_OF_RESTRICTED_FUNCTION"
+        - "AUDIT_RECORDING_STOPPED"
+        - "AUDIT_RECORDING_STARTED"
+        - "OBJECT_SECURITY_ATTRIBUTES_CHANGED"
+        - "SECURITY_ROLES_CHANGED"
+        - "USER_SECURITY_ATTRIBUTES_CHANGED"
+        - "EMERGENCY_OVERRIDE_STOPPED"
+        - "REMOTE_SERVICE_OPERATION_STARTED"
+        - "REMOTE_SERVICE_OPERATION_STOPPED"
+        - "LOCAL_SERVICE_OPERATION_STARTED"
+        - "LOCAL_SERVICE_OPERATION_STOPPED"
+        - "DOSE_CHECK"
+      reportingProcessID:
+        type: "string"
+      alertSubjectID:
+        type: "string"
+      alertDetail:
+        type: "string"
+      optionalSecurityAlertInfo:
+        $ref: "#/definitions/SecurityAlertInfo"
+  QueryInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      subEvent:
+        $ref: "#/definitions/CodedValueType"
+      sourceNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      sourceNetworkAccessPointID:
+        type: "string"
+      sourceName:
+        type: "string"
+      sourceAlternateUserID:
+        type: "string"
+      destinationNetworkAccessPointTypeCode:
+        type: "string"
+        enum:
+        - "MACHINE"
+        - "IP_ADDRESS"
+        - "PHONE_NUMBER"
+      destinationNetworkAccessPointID:
+        type: "string"
+      destinationName:
+        type: "string"
+      destinationAlternateUserID:
+        type: "string"
+      humanRequestorID:
+        type: "string"
+      humanRequestorName:
+        type: "string"
+      patientID:
+        type: "string"
+      messageIdentifier:
+        type: "string"
+      dicomObjectDescriptionContent:
+        $ref: "#/definitions/DICOMObjectDescriptionContent"
+      homeCommunityId:
+        type: "string"
+      queryEncoding:
+        type: "string"
+  QueryInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      sourceID:
+        type: "string"
+      destinationID:
+        type: "string"
+      queryUID:
+        type: "string"
+      transferSyntaxUID:
+        type: "string"
+      query:
+        type: "array"
+        items:
+          type: "string"
+          format: "byte"
+      optionalQueryInfo:
+        $ref: "#/definitions/QueryInfo"
+  AppActivityInfo:
+    type: "object"
+    properties:
+      eventDateTime:
+        type: "string"
+      detail:
+        type: "string"
+      userId:
+        type: "string"
+      userName:
+        type: "string"
+      appName:
+        type: "string"
+      appAlternateUserID:
+        type: "string"
+  ApplicationActivityInput:
+    type: "object"
+    properties:
+      eventOutcome:
+        type: "string"
+        enum:
+        - "SUCCESS"
+        - "MINOR_FAILURE"
+        - "SERIOUS_FAILURE"
+        - "MAJOR_FAILURE"
+      activity:
+        type: "string"
+        enum:
+        - "START"
+        - "STOP"
+      applicationID:
+        type: "string"
+      optionalAppActivityInfo:
+        $ref: "#/definitions/AppActivityInfo"
+  EventInput:
+    type: "object"
+    properties:
+      event:
+        type: "string"
+        enum:
+        - "USERAUTHENTICATION"
+        - "PATIENTRECORD"
+        - "AUDITLOGUSED"
+        - "ORDERRECORD"
+        - "PROCEDURERECORD"
+        - "STUDYDELETED"
+        - "NETWORKENTRY"
+        - "DATAACCESSED"
+        - "TRANSFERRED"
+        - "BEGINTRANSFERRING"
+        - "SECURITYALERT"
+        - "DATAMOVE"
+        - "QUERY"
+        - "APPLICATIONACTIVITY"
+      userAuthentication_input:
+        $ref: "#/definitions/UserAuthenticationInput"
+      patientRecord_input:
+        $ref: "#/definitions/PatientRecordInput"
+      auditLogUsed_input:
+        $ref: "#/definitions/AuditLogUsedInput"
+      orderRecord_input:
+        $ref: "#/definitions/OrderRecordInput"
+      procedureRecord_input:
+        $ref: "#/definitions/ProcedureRecordInput"
+      studyDeleted_input:
+        $ref: "#/definitions/StudyDeletedInput"
+      networkEntry_input:
+        $ref: "#/definitions/NetworkEntryInput"
+      dataAccessed_input:
+        $ref: "#/definitions/DataAccessedInput"
+      transferred_input:
+        $ref: "#/definitions/TransferedInput"
+      beginTransferring_input:
+        $ref: "#/definitions/BeginTransferringInput"
+      securityAlert_input:
+        $ref: "#/definitions/SecurityAlertInput"
+      dataMove_input:
+        $ref: "#/definitions/DataMoveInput"
+      query_input:
+        $ref: "#/definitions/QueryInput"
+      applicationActivity_input:
+        $ref: "#/definitions/ApplicationActivityInput"

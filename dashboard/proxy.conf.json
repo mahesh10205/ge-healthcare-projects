@@ -1,0 +1,10 @@
+{
+  "/dashboard-ui": {
+    "target": "http://ec2-54-82-95-111.compute-1.amazonaws.com:8081/dashboard-ui",
+    "secure": false,
+    "pathRewrite": {
+      "^/dashboard-ui": ""
+    },
+    "changeOrigin": true
+  }
+}
